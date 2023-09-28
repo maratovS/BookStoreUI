@@ -1,27 +1,33 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { BookService } from '../api/services';
+import { BookEditComponent } from '../book-edit/book-edit.component';
 import { TableViewComponent } from '../table-view/table-view.component';
-import { AuthorService } from '../api/services';
-import { AuthorEditComponent } from '../author-edit/author-edit.component';
 
 @Component({
-  selector: 'app-author',
+  selector: 'app-book',
   templateUrl: '../table-view/table-view.component.html',
   styleUrls: ['../table-view/table-view.component.scss']
 })
-export class AuthorComponent extends TableViewComponent implements OnInit, AfterViewInit{
-  override header = "Авторы";
-  override objectName = "publisher";
+export class BookComponent extends TableViewComponent implements OnInit, AfterViewInit {
+  override header = "Книги";
+  override objectName = "book";
 
   constructor (
     dialog: MatDialog,
-    private service: AuthorService)
+    private service: BookService)
   {
     super(dialog);
     this.columns = [
       {field:"id",header:"ID"},
-      {field:"firstName",header:"Имя"},
-      {field:"secondName",header:"Фамилия"},
+      {field:"title",header:"Название книги"},
+      {field:"description",header:"Описание книги"},
+      {field:"publicationYear",header:"Год публикации"},
+      {field:"price",header:"Цена"},
+      {field:"author.firstName",header:"Автор"},
+      {field:"publisher.name",header:"Публикация"},
+      {field:"condition.name",header:"Состояние"},
+      {field:"category.name",header:"Категория"},
       {field:"actions",header:"Действия"}];
     this.headers = this.columns.map(x => x.field);
     this.headersFilters = this.headers.map((x, i) => x+'_'+i);
@@ -42,11 +48,13 @@ export class AuthorComponent extends TableViewComponent implements OnInit, After
 
       console.log("params",params)
 
-      this.service.getAuthorList(params)
+      this.service.getBookList(params)
       .subscribe(items => 
           {
             //@ts-ignore
             this.dataSource = items.records;
+            // this.dataSource.map(element => console.log(element['author']['firstName'] + ' ' + element['author']['secondName']));
+            this.dataSource.map(element => element['author.firstName'] += ' ' + element['author']['secondName']);
             //@ts-ignore
             this.allRowsCount = items.totalRows;
             console.log("dataSource",this.dataSource)
@@ -55,7 +63,7 @@ export class AuthorComponent extends TableViewComponent implements OnInit, After
 
   override create(): void {
     if(this.dialog.openDialogs.length==0) {
-      const dialogRef = this.dialog.open(AuthorEditComponent, {
+      const dialogRef = this.dialog.open(BookEditComponent, {
         backdropClass: 'cdk-overlay-transparent-backdrop',
         hasBackdrop: true,
         width: '450px',
@@ -73,7 +81,7 @@ export class AuthorComponent extends TableViewComponent implements OnInit, After
 
   override edit(row: any){
     if(this.dialog.openDialogs.length==0) {
-      const dialogRef = this.dialog.open(AuthorEditComponent, {
+      const dialogRef = this.dialog.open(BookEditComponent, {
         backdropClass: 'cdk-overlay-transparent-backdrop',
         hasBackdrop: true,
         width: '450px',
@@ -89,7 +97,7 @@ export class AuthorComponent extends TableViewComponent implements OnInit, After
   }
 
   override deleteRow(param: any){
-    this.service.deleteAuthorById(param).subscribe(() =>
+    this.service.deleteBookById(param).subscribe(() =>
       {              
         this.ngOnInit();
       });

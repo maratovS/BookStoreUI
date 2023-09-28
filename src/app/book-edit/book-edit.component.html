@@ -1,0 +1,76 @@
+<mat-card>
+    <mat-card-header>
+        <div style="width: 100%; margin-bottom: 20px;">
+            <div class="headerText">Создать/Редактировать авторов</div>
+            <div class="closeModal">
+                <button mat-icon-button (click)="onClose()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-card-header>
+    <form [formGroup]="form" #formDirective="ngForm" style="margin-left:10px; margin-right:10px">
+
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Название книги</mat-label>
+            <input matInput required formControlName="title" maxlength="50" />
+            <mat-hint align="end">{{f['title'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['title'].errors && f['title'].errors['required']">Обязательное поле</mat-error>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Описание книги</mat-label>
+            <input matInput required formControlName="description" maxlength="50" />
+            <mat-hint align="end">{{f['description'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['description'].errors && f['description'].errors['required']">Обязательное
+                поле</mat-error>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Год публикации</mat-label>
+            <input matInput required formControlName="publicationYear" type="number" />
+            <mat-hint align="end">{{f['publicationYear'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['publicationYear'].errors && f['publicationYear'].errors['required']">Обязательное
+                поле</mat-error>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Цена</mat-label>
+            <input matInput required formControlName="price" maxlength="50" />
+            <mat-hint align="end">{{f['price'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['price'].errors && f['price'].errors['required']">Обязательное поле</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Автор</mat-label>
+            <mat-select matNativeControl formControlName="author">
+                <mat-option *ngFor="let author of this.authors" [value]="author.id">{{author.firstName + ' ' + author.secondName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Публикация</mat-label>
+            <mat-select matNativeControl formControlName="publisher">
+                <mat-option *ngFor="let publisher of this.publishers" [value]="publisher.id">{{publisher.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Состояние</mat-label>
+            <mat-select matNativeControl formControlName="condition">
+                <mat-option *ngFor="let condition of this.conditions" [value]="condition.id">{{condition.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Категория</mat-label>
+            <mat-select matNativeControl formControlName="category">
+                <mat-option *ngFor="let category of this.categories" [value]="category.id">{{category.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+    <div style="width: 100%; text-align: right; margin-bottom: 20px;">
+        <mat-card-footer>
+            <button mat-raised-button style="margin-right: 10px;" (click)="onClose()">Отмена</button>
+            <button mat-raised-button style="margin-right: 10px;" [disabled]="f['title'].errors"
+                (click)="onSave()">Сохранить</button>
+        </mat-card-footer>
+
+    </div>
+</mat-card>

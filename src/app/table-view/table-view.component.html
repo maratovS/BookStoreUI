@@ -36,7 +36,7 @@
         </td>
       </ng-container>
 
-      <ng-container *ngFor="let headersFilter of headersFilters; let i = index" [matColumnDef]="headersFilter">
+      <!-- <ng-container *ngFor="let headersFilter of headersFilters; let i = index" [matColumnDef]="headersFilter">
         <th mat-header-cell *matHeaderCellDef>
           <div class="filters-container" [class.animate]="toggleFilters">
             <mat-form-field *ngIf="i > 0 && i < columns.length-1" appearance="outline" [style.width.px]="columnWidth()"
@@ -46,11 +46,11 @@
             </mat-form-field>
           </div>
         </th>
-      </ng-container>
+      </ng-container> -->
 
       <tr mat-header-row *matHeaderRowDef="headers"></tr>
       <!-- Start: Add below "tr" for displaying filters -->
-      <tr mat-header-row class="no-default-height" *matHeaderRowDef="headersFilters"></tr>
+      <!-- <tr mat-header-row class="no-default-height" *matHeaderRowDef="headersFilters"></tr> -->
       <!-- End: Add above "tr" for displaying filters -->
       <tr mat-row *matRowDef="let row; columns: headers"></tr>
     </table>

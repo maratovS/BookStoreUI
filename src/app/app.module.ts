@@ -35,6 +35,9 @@ import { CategoryComponent } from './category/category.component';
 import { CategoryEditComponent } from './category-edit/category-edit.component';
 import { ConditionComponent } from './condition/condition.component';
 import { ConditionEditComponent } from './condition-edit/condition-edit.component';
+import { BookComponent } from './book/book.component';
+import { BookEditComponent } from './book-edit/book-edit.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -49,7 +52,9 @@ import { ConditionEditComponent } from './condition-edit/condition-edit.componen
     CategoryComponent,
     CategoryEditComponent,
     ConditionComponent,
-    ConditionEditComponent
+    ConditionEditComponent,
+    BookComponent,
+    BookEditComponent
   ],
   imports: [
     HttpClientModule,
@@ -71,7 +76,8 @@ import { ConditionEditComponent } from './condition-edit/condition-edit.componen
     ApiModule.forRoot({ rootUrl: environment.apiURL }),
     NzLayoutModule,
     NzMenuModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [
     {
