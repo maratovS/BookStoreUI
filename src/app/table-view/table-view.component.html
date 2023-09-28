@@ -1,0 +1,64 @@
+<div style="width:10%; display: inline-block;">
+
+</div>
+<div style="width:100%; display: inline-block;">
+  <h1>{{ header }}</h1>
+  <div id="action-bar" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+    <div id="create-action" style="display: inline">
+      <button id="create-button" mat-raised-button style="width: 150px;" (click)="create()"
+        *ngIf="showCreate()">Создать</button>
+    </div>
+    <div id="action-buttons" style="display: inline">
+      <button id="refresh-button" mat-raised-button style="margin-right: 10px; margin-left: 10px;"
+        (click)="refresh()"><i class="material-icons" style="font-size: 30px;">refresh</i></button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
+      <ng-container *ngFor="let column of columns; let i = index" [matColumnDef]="column.field">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header
+          [attr.disabled]="i < 1 || i == columns.length-1 || column.header == 'Узел'">
+          <span *ngIf="i > 0">{{ column.header }}</span>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="i!=columns.length-1">{{ getText(element,column)}}</span>
+          <div *ngIf="i==columns.length-1">
+            <button mat-icon-button color="primary" (click)="edit(element)" title="Изменить"
+              *ngIf="showAction('edit', element)" [disabled]="disableEdit">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="delete(element)" title="Удалить"
+              *ngIf="showAction('delete', element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container *ngFor="let headersFilter of headersFilters; let i = index" [matColumnDef]="headersFilter">
+        <th mat-header-cell *matHeaderCellDef>
+          <div class="filters-container" [class.animate]="toggleFilters">
+            <mat-form-field *ngIf="i > 0 && i < columns.length-1" appearance="outline" [style.width.px]="columnWidth()"
+              style="margin-top:10px; margin-bottom:-10px">
+              <input matInput placeholder="FILTER.PLACEHOLDER" [(ngModel)]="filtersModel[i]"
+                (keyup.enter)="searchColumns()" />
+            </mat-form-field>
+          </div>
+        </th>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="headers"></tr>
+      <!-- Start: Add below "tr" for displaying filters -->
+      <tr mat-header-row class="no-default-height" *matHeaderRowDef="headersFilters"></tr>
+      <!-- End: Add above "tr" for displaying filters -->
+      <tr mat-row *matRowDef="let row; columns: headers"></tr>
+    </table>
+    <mat-paginator [length]="allRowsCount" [pageSize]="this.pageSize" [hidePageSize]="true"
+      (page)="onPageChange($event)"></mat-paginator>
+  </div>
+
+</div>
+<div style="width:10%; display: inline-block;">
+
+</div>

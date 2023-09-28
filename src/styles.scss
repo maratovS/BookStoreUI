@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.headerText{
+    padding-top: 11px;
+    margin-right: 20px;
+    width: calc(100% - 70px);
+    font-size: large;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.closeModal{
+    text-align: right;
+    display: inline-block;
+}
+
+.table-container {
+    overflow: auto;
+    table {
+      width: 100%;
+    }
+    th, td {
+      padding: 0 1rem;
+      //border: 1px solid lightgrey;
+    }
+    th:nth-child(1) {
+      width: 20px;
+    }
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+    .no-default-height {
+      height: unset;
+    }
+  }
+
+  .table-modal-container {
+      overflow: auto;
+      table {
+        width: 70% !important;
+      }
+      th, td {
+        padding: 0 1rem;
+        //border: 1px solid lightgrey;
+      }
+      th:nth-child(1) {
+        width: 20px;
+      }
+      ::ng-deep .mat-form-field-wrapper {
+        padding-bottom: 0;
+      }
+      .no-default-height {
+        height: unset;
+      }
+    }
+
+  .filters-container{
+    width: 100%;
+  }
