@@ -1,27 +1,31 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from '../api/services';
 import { TableViewComponent } from '../table-view/table-view.component';
-import { AuthorService } from '../api/services';
-import { AuthorEditComponent } from '../author-edit/author-edit.component';
+import { UserEditComponent } from '../user-edit/user-edit.component';
 
 @Component({
-  selector: 'app-author',
+  selector: 'app-user',
   templateUrl: '../table-view/table-view.component.html',
   styleUrls: ['../table-view/table-view.component.scss']
 })
-export class AuthorComponent extends TableViewComponent implements OnInit, AfterViewInit {
-  override header = "Авторы";
-  override objectName = "publisher";
+export class UserComponent extends TableViewComponent implements OnInit, AfterViewInit {
+  override header = "Пользователи";
+  override objectName = "user";
 
   constructor (
     dialog: MatDialog,
-    private service: AuthorService)
+    private service: UserService)
   {
     super(dialog);
     this.columns = [
       {field:"id",header:"ID"},
       {field:"firstName",header:"Имя"},
-      {field:"secondName",header:"Фамилия"},
+      {field:"lastName",header:"Фамилия"},
+      {field:"patronymic",header:"Отчество"},
+      {field:"email",header:"Эл. почта"},
+      {field:"phoneNumber",header:"Тел .номер"},
+      {field:"password",header:"Пароль"},
       {field:"actions",header:"Действия"}];
     this.headers = this.columns.map(x => x.field);
     this.headersFilters = this.headers.map((x, i) => x+'_'+i);
@@ -42,7 +46,7 @@ export class AuthorComponent extends TableViewComponent implements OnInit, After
 
       console.log("params",params)
 
-      this.service.getAuthorList(params)
+      this.service.getUserList(params)
       .subscribe(items => 
           {
             //@ts-ignore
@@ -55,7 +59,7 @@ export class AuthorComponent extends TableViewComponent implements OnInit, After
 
   override create(): void {
     if(this.dialog.openDialogs.length==0) {
-      const dialogRef = this.dialog.open(AuthorEditComponent, {
+      const dialogRef = this.dialog.open(UserEditComponent, {
         backdropClass: 'cdk-overlay-transparent-backdrop',
         hasBackdrop: true,
         width: '450px',
@@ -73,7 +77,7 @@ export class AuthorComponent extends TableViewComponent implements OnInit, After
 
   override edit(row: any){
     if(this.dialog.openDialogs.length==0) {
-      const dialogRef = this.dialog.open(AuthorEditComponent, {
+      const dialogRef = this.dialog.open(UserEditComponent, {
         backdropClass: 'cdk-overlay-transparent-backdrop',
         hasBackdrop: true,
         width: '450px',
@@ -89,7 +93,7 @@ export class AuthorComponent extends TableViewComponent implements OnInit, After
   }
 
   override deleteRow(param: any){
-    this.service.deleteAuthorById(param).subscribe(() =>
+    this.service.deleteUserById(param).subscribe(() =>
       {              
         this.ngOnInit();
       });

@@ -3,8 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, tap } from 'rxjs';
-import { PublisherService } from '../api/services';
 import { DeleteComponent } from '../common/delete/delete.component';
+import { SignInComponent } from '../sign-in/sign-in.component';
+import { UserEditComponent } from '../user-edit/user-edit.component';
+import { UserDto } from '../api/models';
 
 @Component({
   selector: 'app-table-view',
@@ -39,6 +41,7 @@ export class TableViewComponent implements OnInit, AfterViewInit {
   disableDownload: boolean = false;
   disableInfo: boolean = false;
   disableEdit: boolean = false;
+  user: UserDto | undefined;
 
   constructor(
     public dialog: MatDialog) { }
@@ -46,6 +49,10 @@ export class TableViewComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.calcPageSize();
     console.log(this.actions);
+    console.log(this.user);
+    if (localStorage.hasOwnProperty('user')) {
+      this.user = JSON.parse(localStorage.getItem('user')!);
+    }
     this.getData(this.getParams('', this.sortBy, this.pageNumber, this.pageSize, this.sortDir));
   }
 
@@ -126,6 +133,7 @@ export class TableViewComponent implements OnInit, AfterViewInit {
 
   refresh() {
     this.getData(this.getParams(JSON.stringify(this.filterKeys), this.sortBy, this.pageNumber, this.pageSize, this.sortDir));
+    console.log(this.user);
   }
 
   searchColumns() {
@@ -180,5 +188,43 @@ export class TableViewComponent implements OnInit, AfterViewInit {
   }
 
   deleteRow(param: any) {
+  }
+
+  signIn() {
+    const dialogRef = this.dialog.open(SignInComponent, {
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      hasBackdrop: true,
+      width: '450px',
+      maxHeight: '550px',
+      data: {
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(async result => {
+      this.user = result;
+      localStorage.setItem('user', JSON.stringify(result));
+    });
+  }
+
+  signUp() {
+    const dialogRef = this.dialog.open(UserEditComponent, {
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      hasBackdrop: true,
+      width: '450px',
+      maxHeight: '550px',
+      data: {
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(async result => {
+      this.user = result;
+      localStorage.setItem('user', JSON.stringify(result));
+
+    });
+  }
+
+  signOut() {
+    this.user = undefined;
+    localStorage.removeItem('user');
   }
 }

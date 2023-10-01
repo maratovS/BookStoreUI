@@ -25,4 +25,15 @@ export class AppComponent {
     this.isShowing = !this.isShowing;
     console.log(this.isShowing);
   }
+
+  checkUser(attr: string) {
+    return localStorage.hasOwnProperty(attr);
+  }
+
+  checkAdmin(attr: string) {
+    if (localStorage.getItem(attr) != null) {
+      return JSON.parse(localStorage.getItem(attr)!)['email'] == 'admin';
+    }
+    return false;
+  }
 }

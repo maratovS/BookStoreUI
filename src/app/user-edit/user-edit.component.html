@@ -1,0 +1,59 @@
+<mat-card>
+    <mat-card-header>
+        <div style="width: 100%; margin-bottom: 20px;">
+        <div class="headerText">Создать/Редактировать пользователя</div>
+        <div class="closeModal">
+            <button mat-icon-button (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div></div>
+    </mat-card-header>
+  <form [formGroup]="form" #formDirective="ngForm" style="margin-left:10px; margin-right:10px">
+
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Имя</mat-label>
+            <input matInput required formControlName="firstName" maxlength="50"/>
+            <mat-hint align="end">{{f['firstName'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['firstName'].errors && f['firstName'].errors['required']">Обязательное поле</mat-error>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Фамилия</mat-label>
+            <input matInput required formControlName="lastName" maxlength="50"/>
+            <mat-hint align="end">{{f['lastName'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['lastName'].errors && f['lastName'].errors['required']">Обязательное поле</mat-error>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Отчество</mat-label>
+            <input matInput required formControlName="patronymic" maxlength="50"/>
+            <mat-hint align="end">{{f['patronymic'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['patronymic'].errors && f['patronymic'].errors['required']">Обязательное поле</mat-error>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Эл. почта</mat-label>
+            <input matInput required formControlName="email" maxlength="50"/>
+            <mat-hint align="end">{{f['email'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['email'].errors && f['email'].errors['required']">Обязательное поле</mat-error>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Тел .номер</mat-label>
+            <input matInput required formControlName="phoneNumber" maxlength="50"/>
+            <mat-hint align="end">{{f['phoneNumber'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['phoneNumber'].errors && f['phoneNumber'].errors['required']">Обязательное поле</mat-error>
+        </mat-form-field>
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Пароль</mat-label>
+            <input matInput required formControlName="password" maxlength="50"/>
+            <mat-hint align="end">{{f['password'].value?.length}} / 50</mat-hint>
+            <mat-error *ngIf="f['password'].errors && f['password'].errors['required']">Обязательное поле</mat-error>
+        </mat-form-field>
+
+    </form>
+    
+    <div style="width: 100%; text-align: right; margin-bottom: 20px;">
+    <mat-card-footer>
+        <button mat-raised-button style="margin-right: 10px;" (click)="onClose()">Отмена</button>
+        <button mat-raised-button style="margin-right: 10px;" [disabled]="f['firstName'].errors" (click)="onSave()">Сохранить</button>
+    </mat-card-footer>
+    
+    </div>
+  </mat-card>

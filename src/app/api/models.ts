@@ -7,4 +7,5 @@ export { ConditionDto } from './models/condition-dto';
 export { OrderDto } from './models/order-dto';
 export { PageDto } from './models/page-dto';
 export { PublisherDto } from './models/publisher-dto';
+export { SignInDto } from './models/sign-in-dto';
 export { UserDto } from './models/user-dto';

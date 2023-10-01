@@ -18,6 +18,8 @@ import { GetUserList$Params } from '../fn/user/get-user-list';
 import { PageDto } from '../models/page-dto';
 import { postUser } from '../fn/user/post-user';
 import { PostUser$Params } from '../fn/user/post-user';
+import { signInUser } from '../fn/user/sign-in-user';
+import { SignInUser$Params } from '../fn/user/sign-in-user';
 import { updateUser } from '../fn/user/update-user';
 import { UpdateUser$Params } from '../fn/user/update-user';
 import { UserDto } from '../models/user-dto';
@@ -106,6 +108,35 @@ export class UserService extends BaseService {
    */
   postUser(params: PostUser$Params, context?: HttpContext): Observable<UserDto> {
     return this.postUser$Response(params, context).pipe(
+      map((r: StrictHttpResponse<UserDto>): UserDto => r.body)
+    );
+  }
+
+  /** Path part for operation `signInUser()` */
+  static readonly SignInUserPath = '/user/signIn';
+
+  /**
+   * Sign in a user
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `signInUser()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  signInUser$Response(params: SignInUser$Params, context?: HttpContext): Observable<StrictHttpResponse<UserDto>> {
+    return signInUser(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Sign in a user
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `signInUser$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  signInUser(params: SignInUser$Params, context?: HttpContext): Observable<UserDto> {
+    return this.signInUser$Response(params, context).pipe(
       map((r: StrictHttpResponse<UserDto>): UserDto => r.body)
     );
   }

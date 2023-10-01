@@ -11,7 +11,7 @@
   <form [formGroup]="form" #formDirective="ngForm" style="margin-left:10px; margin-right:10px">
 
         <mat-form-field [style.width.%]="100">
-            <mat-label>ФИО</mat-label>
+            <mat-label>Категория</mat-label>
             <input matInput required formControlName="name" maxlength="50"/>
             <mat-hint align="end">{{f['name'].value?.length}} / 50</mat-hint>
             <mat-error *ngIf="f['name'].errors && f['name'].errors['required']">Обязательное поле</mat-error>

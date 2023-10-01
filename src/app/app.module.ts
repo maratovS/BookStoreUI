@@ -38,6 +38,12 @@ import { ConditionEditComponent } from './condition-edit/condition-edit.componen
 import { BookComponent } from './book/book.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { MatSelectModule } from '@angular/material/select';
+import { UserComponent } from './user/user.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
+import { OrderComponent } from './order/order.component';
+import { OrderEditComponent } from './order-edit/order-edit.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { OrderEditBookComponent } from './order-edit-book/order-edit-book.component';
 
 
 @NgModule({
@@ -54,7 +60,13 @@ import { MatSelectModule } from '@angular/material/select';
     ConditionComponent,
     ConditionEditComponent,
     BookComponent,
-    BookEditComponent
+    BookEditComponent,
+    UserComponent,
+    UserEditComponent,
+    OrderComponent,
+    OrderEditComponent,
+    SignInComponent,
+    OrderEditBookComponent
   ],
   imports: [
     HttpClientModule,

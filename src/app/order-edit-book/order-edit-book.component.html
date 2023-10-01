@@ -1,0 +1,66 @@
+<mat-card>
+    <mat-card-header>
+        <div style="width: 100%; margin-bottom: 20px;">
+        <div class="headerText">
+          <h1>{{ header  }}</h1>
+        </div><div class="closeModal">
+            <button mat-icon-button (click)="onClose()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div></div>
+    </mat-card-header>
+<div style="width:100%; display: inline-block;">
+
+    <div class="table-modal-container">
+        <table mat-table [dataSource]="dataSource" matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
+          <ng-container
+            *ngFor="let column of columns; let i = index"
+            [matColumnDef]="column.field"
+          >
+            <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="i < 1">
+              <span *ngIf="i > 0">{{ column.header }}</span>
+            </th>
+            <td mat-cell *matCellDef="let element" [style.background]="element == selectedRow ? 'lightgrey' : ''" 
+            (click)="select(element)" style="cursor: pointer;">
+                <span *ngIf="i!=columns.length">{{ getText(element,column)}}</span>                
+            </td>
+          </ng-container>
+      
+          <!-- <ng-container
+            *ngFor="let headersFilter of headersFilters; let i = index"
+            [matColumnDef]="headersFilter"
+          >
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="filters-container" [class.animate]="toggleFilters">
+                <mat-form-field *ngIf="i > 0" appearance="outline" [style.width.px]="columnWidth()" 
+                    style="margin-top:10px; margin-bottom:-10px">
+                  <input
+                    matInput
+                    placeholder="{{ 'FILTER.PLACEHOLDER' | translate }}"
+                    [(ngModel)]="filtersModel[i]"
+                    (keyup.enter)="searchColumns()"
+                  />
+                </mat-form-field>
+              </div>
+            </th>
+          </ng-container> -->
+      
+          <tr mat-header-row *matHeaderRowDef="headers"></tr>
+          <!-- Start: Add below "tr" for displaying filters -->
+          <!-- <tr
+            mat-header-row
+            class="no-default-height"
+            *matHeaderRowDef="headersFilters"
+          ></tr> -->
+          <!-- End: Add above "tr" for displaying filters -->
+          <tr mat-row *matRowDef="let row; columns: headers"></tr>
+        </table>
+        <mat-paginator [length]="allRowsCount" [pageSize]="this.pageSize" [hidePageSize]="true"></mat-paginator>
+      </div>
+
+</div>
+<div style="width:100%; display: inline-block; text-align: right; margin-bottom: 20px;">
+  <button mat-raised-button  style="width: 150px; margin-right: 10px;" (click)="onClose()">Отмена</button>
+  <button mat-raised-button  style="width: 150px; margin-right: 10px;" [disabled]="this.selectedRow == undefined" (click)="add()">Сохранить</button>
+</div>
+</mat-card>
