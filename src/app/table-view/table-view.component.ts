@@ -50,7 +50,7 @@ export class TableViewComponent implements OnInit, AfterViewInit {
     this.calcPageSize();
     console.log(this.actions);
     console.log(this.user);
-    if (localStorage.hasOwnProperty('user')) {
+    if (localStorage.hasOwnProperty('user') && localStorage.getItem('user') != 'undefined') {
       this.user = JSON.parse(localStorage.getItem('user')!);
     }
     this.getData(this.getParams('', this.sortBy, this.pageNumber, this.pageSize, this.sortDir));

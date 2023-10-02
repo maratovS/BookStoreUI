@@ -31,7 +31,7 @@ export class AppComponent {
   }
 
   checkAdmin(attr: string) {
-    if (localStorage.getItem(attr) != null) {
+    if (localStorage.getItem(attr) != 'undefined') {
       return JSON.parse(localStorage.getItem(attr)!)['email'] == 'admin';
     }
     return false;

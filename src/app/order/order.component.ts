@@ -40,12 +40,12 @@ export class OrderComponent extends TableViewComponent implements OnInit, AfterV
   }
 
   override getData(params: any) {
-    if (localStorage.hasOwnProperty('user') && JSON.parse(localStorage.getItem('user')!).email != 'admin') {
-      this.filterKeys['userId'] = JSON.parse(localStorage.getItem('user')!).id;
-      //params.filter['userId'] = JSON.parse(localStorage.getItem('user')!).id;
-    }
-    params.filter = JSON.stringify(this.filterKeys);
-    console.log("params", params)
+    // if (localStorage.hasOwnProperty('user') && JSON.parse(localStorage.getItem('user')!).email != 'admin') {
+    //   this.filterKeys['userId'] = JSON.parse(localStorage.getItem('user')!).id;
+    //   //params.filter['userId'] = JSON.parse(localStorage.getItem('user')!).id;
+    // }
+    // params.filter = JSON.stringify(this.filterKeys);
+    // console.log("params", params)
 
     this.service.getOrderList(params)
       .subscribe(items => {
