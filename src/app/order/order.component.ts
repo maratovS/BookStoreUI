@@ -16,9 +16,9 @@ export class OrderComponent extends TableViewComponent implements OnInit, AfterV
 
   constructor(
     dialog: MatDialog,
-    private router: Router,
+    private routerLocal: Router,
     private service: OrderService) {
-    super(dialog);
+    super(routerLocal, dialog);
     this.columns = [
       { field: "id", header: "ID" },
       { field: "date", header: "Дата" },

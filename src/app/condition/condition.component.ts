@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConditionService } from '../api/services';
 import { ConditionEditComponent } from '../condition-edit/condition-edit.component';
 import { TableViewComponent } from '../table-view/table-view.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-condition',
@@ -15,9 +16,10 @@ export class ConditionComponent extends TableViewComponent implements OnInit, Af
 
   constructor (
     dialog: MatDialog,
+    private routerLocal: Router,
     private service: ConditionService)
   {
-    super(dialog);
+    super(routerLocal, dialog);
     this.columns = [
       {field:"id",header:"ID"},
       {field:"name",header:"Состояние"},

@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { BookDto } from '../api/models';
 import { BookService } from '../api/services';
 import { TableViewComponent } from '../table-view/table-view.component';
+import { Router } from '@angular/router';
 
 export interface DialogData {
   name: string,
@@ -23,8 +24,9 @@ export class OrderEditBookComponent extends TableViewComponent implements OnInit
   constructor(public dialogRef: MatDialogRef<OrderEditBookComponent>,
     dialog: MatDialog,
     private service: BookService,
+    private routerLocal: Router,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-    super(dialog);
+    super(routerLocal, dialog);
     this.columns = [
       { field: "id", header: "ID" },
       { field: "title", header: "Название книги" },

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CategoryService } from '../api/services';
 import { CategoryEditComponent } from '../category-edit/category-edit.component';
 import { TableViewComponent } from '../table-view/table-view.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category',
@@ -15,9 +16,10 @@ export class CategoryComponent extends TableViewComponent implements OnInit, Aft
 
   constructor (
     dialog: MatDialog,
+    private routerLocal: Router,
     private service: CategoryService)
   {
-    super(dialog);
+    super(routerLocal, dialog);
     this.columns = [
       {field:"id",header:"ID"},
       {field:"name",header:"Категория"},

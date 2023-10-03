@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserService } from '../api/services';
 import { TableViewComponent } from '../table-view/table-view.component';
 import { UserEditComponent } from '../user-edit/user-edit.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -15,9 +16,10 @@ export class UserComponent extends TableViewComponent implements OnInit, AfterVi
 
   constructor (
     dialog: MatDialog,
+    private routerLocal: Router,
     private service: UserService)
   {
-    super(dialog);
+    super(routerLocal, dialog);
     this.columns = [
       {field:"id",header:"ID"},
       {field:"firstName",header:"Имя"},

@@ -25,10 +25,10 @@ export class OrderEditComponent extends TableViewComponent implements OnInit, Af
   constructor(
     dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private router: Router,
+    private routerLocal: Router,
     private service: OrderService,
     private route: ActivatedRoute) {
-    super(dialog);
+    super(routerLocal, dialog);
     this.columns = [
       {field:"id",header:"ID"},
       {field:"title",header:"Название книги"},

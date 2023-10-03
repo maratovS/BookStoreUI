@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TableViewComponent } from '../table-view/table-view.component';
 import { AuthorService } from '../api/services';
 import { AuthorEditComponent } from '../author-edit/author-edit.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-author',
@@ -15,9 +16,10 @@ export class AuthorComponent extends TableViewComponent implements OnInit, After
 
   constructor (
     dialog: MatDialog,
+    private routerLocal: Router,
     private service: AuthorService)
   {
-    super(dialog);
+    super(routerLocal, dialog);
     this.columns = [
       {field:"id",header:"ID"},
       {field:"firstName",header:"Имя"},

@@ -10,7 +10,7 @@ import { OrderComponent } from './order/order.component';
 import { OrderEditComponent } from './order-edit/order-edit.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'publisher' },
+  { path: '', pathMatch: 'full', redirectTo: 'book' },
   { path: 'author', component: AuthorComponent },
   { path: 'publisher', component: PublisherComponent },
   { path: 'category', component: CategoryComponent },

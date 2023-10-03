@@ -3,6 +3,7 @@ import { TableViewComponent } from '../table-view/table-view.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PublisherService } from '../api/services';
 import { PublisherEditComponent } from '../publisher-edit/publisher-edit.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-publisher',
@@ -16,9 +17,10 @@ export class PublisherComponent extends TableViewComponent implements OnInit, Af
 
   constructor (
     dialog: MatDialog,
+    private routerLocal: Router,
     private service: PublisherService)
   {
-    super(dialog);
+    super(routerLocal, dialog);
     this.columns = [
       {field:"id",header:"ID"},
       {field:"name",header:"Название публикации"},

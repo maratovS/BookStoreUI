@@ -5,7 +5,7 @@
   <h1>{{ header }}</h1>
   <div id="action-bar" style="display: flex; justify-content: space-between; margin-bottom: 10px;">
     <div id="create-action" style="display: inline">
-      <button id="create-button" mat-raised-button style="width: 150px;" (click)="create()"
+      <button id="create-button" [disabled]="this.user == undefined || (header =='Книги' && this.user.email != 'admin')" mat-raised-button style="width: 150px;" (click)="create()"
         *ngIf="showCreate()">Создать</button>
     </div>
     <div id="action-buttons" style="display: inline">

@@ -7,6 +7,7 @@ import { DeleteComponent } from '../common/delete/delete.component';
 import { SignInComponent } from '../sign-in/sign-in.component';
 import { UserEditComponent } from '../user-edit/user-edit.component';
 import { UserDto } from '../api/models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-table-view',
@@ -41,18 +42,20 @@ export class TableViewComponent implements OnInit, AfterViewInit {
   disableDownload: boolean = false;
   disableInfo: boolean = false;
   disableEdit: boolean = false;
-  user: UserDto | undefined;
+  user: UserDto | undefined = undefined;
 
   constructor(
+    public router: Router,
     public dialog: MatDialog) { }
 
   ngOnInit() {
     this.calcPageSize();
     console.log(this.actions);
-    console.log(this.user);
     if (localStorage.hasOwnProperty('user') && localStorage.getItem('user') != 'undefined') {
       this.user = JSON.parse(localStorage.getItem('user')!);
     }
+    console.log(this.user);
+    console.log(this.user == undefined);
     this.getData(this.getParams('', this.sortBy, this.pageNumber, this.pageSize, this.sortDir));
   }
 
@@ -219,12 +222,13 @@ export class TableViewComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(async result => {
       this.user = result;
       localStorage.setItem('user', JSON.stringify(result));
-
+      this.router.navigate([this.router.url]);
     });
   }
 
   signOut() {
     this.user = undefined;
     localStorage.removeItem('user');
+    this.router.navigate(['book']);
   }
 }

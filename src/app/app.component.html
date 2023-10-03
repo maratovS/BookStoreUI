@@ -8,11 +8,11 @@
         <mat-nav-list>
 
           <a mat-list-item *ngIf="checkUser('user') && checkAdmin('user')" (click)="navigate('/user')">Пользователи</a>
-          <a mat-list-item (click)="navigate('/author')">Авторы</a>
-          <a mat-list-item (click)="navigate('/category')">Категории</a>
+          <a mat-list-item *ngIf="checkUser('user') && checkAdmin('user')" (click)="navigate('/author')">Авторы</a>
+          <a mat-list-item *ngIf="checkUser('user') && checkAdmin('user')" (click)="navigate('/category')">Категории</a>
           <a mat-list-item (click)="navigate('/book')">Книги</a>
-          <a mat-list-item (click)="navigate('/condition')">Состояния</a>
-          <a mat-list-item (click)="navigate('/publisher')">Публикации</a>
+          <a mat-list-item *ngIf="checkUser('user') && checkAdmin('user')" (click)="navigate('/condition')">Состояния</a>
+          <a mat-list-item *ngIf="checkUser('user') && checkAdmin('user')" (click)="navigate('/publisher')">Публикации</a>
           <a mat-list-item *ngIf="checkUser('user')" (click)="navigate('/order')">Заказы</a>
 
         </mat-nav-list>

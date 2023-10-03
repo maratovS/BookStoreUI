@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BookService } from '../api/services';
 import { BookEditComponent } from '../book-edit/book-edit.component';
 import { TableViewComponent } from '../table-view/table-view.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -15,9 +16,10 @@ export class BookComponent extends TableViewComponent implements OnInit, AfterVi
 
   constructor (
     dialog: MatDialog,
+    private routerLocal: Router,
     private service: BookService)
   {
-    super(dialog);
+    super(routerLocal, dialog);
     this.columns = [
       {field:"id",header:"ID"},
       {field:"title",header:"Название книги"},
