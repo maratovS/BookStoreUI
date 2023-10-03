@@ -123,6 +123,12 @@ export class TableViewComponent implements OnInit, AfterViewInit {
   }
 
   showAction(actionName: string, row: any) {
+    if (actionName != 'info' && this.user == undefined) {
+      return false;
+    }
+    if (actionName != 'info' && this.user != undefined && this.user.email != 'admin') {
+      return false;
+    }
     return this.actions.filter(item => item == actionName).length > 0;
   }
 
@@ -161,6 +167,10 @@ export class TableViewComponent implements OnInit, AfterViewInit {
 
   edit(row: any) {
     console.log("edit", row);
+  }
+
+  info(row: any) {
+    console.log('info', row);
   }
 
   delete(row: any) {

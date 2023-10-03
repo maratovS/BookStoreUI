@@ -4,6 +4,7 @@ import { BookService } from '../api/services';
 import { BookEditComponent } from '../book-edit/book-edit.component';
 import { TableViewComponent } from '../table-view/table-view.component';
 import { Router } from '@angular/router';
+import { BookInfoComponent } from '../book-info/book-info.component';
 
 @Component({
   selector: 'app-book',
@@ -33,7 +34,7 @@ export class BookComponent extends TableViewComponent implements OnInit, AfterVi
       {field:"actions",header:"Действия"}];
     this.headers = this.columns.map(x => x.field);
     this.headersFilters = this.headers.map((x, i) => x+'_'+i);
-    this.actions = ['edit', 'delete']
+    this.actions = ['info', 'edit', 'delete']
   }  
 
   override getParams(filter: string, sortBy: string, pageNumber: number, pageSize: number, sortDir: string){
@@ -49,7 +50,7 @@ export class BookComponent extends TableViewComponent implements OnInit, AfterVi
   override getData(params: any){
 
       console.log("params",params)
-
+      params.filter = JSON.stringify(this.filterKeys)
       this.service.getBookList(params)
       .subscribe(items => 
           {
@@ -103,5 +104,22 @@ export class BookComponent extends TableViewComponent implements OnInit, AfterVi
       {              
         this.ngOnInit();
       });
+  }
+
+  override info(row: any) {
+    if(this.dialog.openDialogs.length==0) {
+      const dialogRef = this.dialog.open(BookInfoComponent, {
+        backdropClass: 'cdk-overlay-transparent-backdrop',
+        hasBackdrop: true,
+        width: '450px',
+        maxHeight: '550px',
+        data: {item: row, action: 'edit'},
+      });
+
+      // @ts-ignore
+      dialogRef.afterClosed().subscribe(async result => {
+        this.ngOnInit();
+      });
+    }
   }
 }

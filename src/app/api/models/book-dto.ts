@@ -10,6 +10,7 @@ export interface BookDto {
   condition?: ConditionDto;
   description?: string;
   id?: number;
+  poster?: string;
   price?: number;
   publicationYear?: number;
   publisher?: PublisherDto;

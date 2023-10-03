@@ -33,6 +33,10 @@
         <td mat-cell *matCellDef="let element">
           <span *ngIf="i!=columns.length-1">{{ getText(element,column)}}</span>
           <div *ngIf="i==columns.length-1">
+            <button mat-icon-button color="primary" (click)="info(element)" title="Изменить"
+            *ngIf="showAction('info', element)">
+            <mat-icon>info</mat-icon>
+          </button>
             <button mat-icon-button color="primary" (click)="edit(element)" title="Изменить"
               *ngIf="showAction('edit', element)" [disabled]="disableEdit">
               <mat-icon>edit</mat-icon>

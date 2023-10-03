@@ -37,7 +37,10 @@
             <mat-hint align="end">{{f['price'].value?.length}} / 50</mat-hint>
             <mat-error *ngIf="f['price'].errors && f['price'].errors['required']">Обязательное поле</mat-error>
         </mat-form-field>
-
+        <mat-form-field [style.width.%]="100">
+            <mat-label>Обложка</mat-label>
+            <input matInput required formControlName="poster" />
+        </mat-form-field>
 
         <mat-form-field [style.width.%]="100">
             <mat-label>Автор</mat-label>

@@ -44,6 +44,7 @@ import { OrderComponent } from './order/order.component';
 import { OrderEditComponent } from './order-edit/order-edit.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { OrderEditBookComponent } from './order-edit-book/order-edit-book.component';
+import { BookInfoComponent } from './book-info/book-info.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { OrderEditBookComponent } from './order-edit-book/order-edit-book.compon
     OrderComponent,
     OrderEditComponent,
     SignInComponent,
-    OrderEditBookComponent
+    OrderEditBookComponent,
+    BookInfoComponent
   ],
   imports: [
     HttpClientModule,

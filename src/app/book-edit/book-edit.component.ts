@@ -35,6 +35,7 @@ export class BookEditComponent {
       description: ['', [Validators.required, Validators.maxLength(50)]],
       publicationYear: ['', [Validators.required, Validators.maxLength(50)]],
       price: ['', [Validators.required, Validators.maxLength(50)]],
+      poster: ['', [Validators.required, Validators.maxLength(50)]],
       author: ['', null],
       publisher: ['', null],
       condition: ['', null],
@@ -83,6 +84,7 @@ export class BookEditComponent {
         description: this.data.item.description,
         publicationYear: this.data.item.publicationYear,
         price: this.data.item.price,
+        poster: this.data.item.poster,
         author: this.data.item.author?.id,
         publisher: this.data.item.publisher?.id,
         condition: this.data.item.condition?.id,
@@ -133,6 +135,7 @@ export class BookEditComponent {
       this.data.item.title = this.f['title'].value;
       this.data.item.description = this.f['description'].value;
       this.data.item.price = this.f['price'].value;
+      this.data.item.poster = this.f['poster'].value;
       this.data.item.publicationYear = this.f['publicationYear'].value;
       let param = {
         id: this.data.item.id == undefined ? 0 : this.data.item.id,
@@ -148,6 +151,7 @@ export class BookEditComponent {
         "description": this.f['description'].value,
         "publicationYear": this.f['publicationYear'].value,
         "price": this.f['price'].value,
+        "poster": this.f['poster'].value,
         "author": author,
         "publisher": publisher,
         "condition": condition,
