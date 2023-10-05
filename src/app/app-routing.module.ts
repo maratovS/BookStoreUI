@@ -8,10 +8,12 @@ import { ConditionComponent } from './condition/condition.component';
 import { UserComponent } from './user/user.component';
 import { OrderComponent } from './order/order.component';
 import { OrderEditComponent } from './order-edit/order-edit.component';
+import {GreetingComponent} from "./greeting/greeting.component";
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'book' },
+  { path: '', pathMatch: 'full', redirectTo: 'greeting' },
   { path: 'author', component: AuthorComponent },
+  { path: 'greeting', component: GreetingComponent },
   { path: 'publisher', component: PublisherComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'condition', component: ConditionComponent },
